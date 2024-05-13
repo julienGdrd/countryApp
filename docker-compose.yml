@@ -1,0 +1,23 @@
+services:
+  backend:
+    stop_grace_period: 0s
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 4000:4000
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/countries.sqlite:/app/countries.sqlite
+
+  frontend:
+    env_file:
+      - ./global.env
+    stop_grace_period: 0s
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/src:/app/src
